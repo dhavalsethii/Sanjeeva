@@ -1,9 +1,11 @@
-import './index.css'
+import Home from "./pages/Home";
 
-const App = () => {
+function App() {
   return (
-    <div className='bg-blue-500'>App</div>
-  )
+    <div>
+      <Home />
+    </div>
+  );
 }
 
-export default App
+export default App;
