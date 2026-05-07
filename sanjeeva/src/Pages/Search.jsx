@@ -39,7 +39,7 @@ const Search = ({ data = [] }) => {
                         value={bloodGroup}
                         onChange={(e) => setBloodGroup(e.target.value)}
                         className='border-2 border-gray-200 rounded-lg p-2 shadow-sm w-48 outline-none focus:border-red-500 transition-colors cursor-pointer'
-                    >
+>
                         <option>A+</option>
                         <option>A-</option>
                         <option>B+</option>
