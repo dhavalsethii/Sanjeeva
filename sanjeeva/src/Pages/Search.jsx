@@ -25,7 +25,7 @@ const Search = ({ data = [] }) => {
 
     return (
         <>
-        <Navbar variant="light" />
+        <Navbar />
         <div className='max-w-full mx-auto px-10 py-8 min-h-[85vh]'>
             <h1 className='text-4xl font-sans mb-1 font-bold'>
                 <span className='text-red-600'>Find blood</span> near you

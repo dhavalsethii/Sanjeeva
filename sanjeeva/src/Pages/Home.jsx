@@ -6,7 +6,7 @@ import Footer from "../Components/Footer";
 function Home() {
   return (
     <div>
-      <Navbar variant="light" />
+      <Navbar />
       <Hero />
       <Features />
       <Footer />

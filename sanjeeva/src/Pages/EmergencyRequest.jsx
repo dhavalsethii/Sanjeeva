@@ -6,7 +6,7 @@ import Footer from '../Components/Footer'
 const EmergencyRequest = () => {
   return (
     <>
-    <Navbar variant="light" />
+    <Navbar />
 <div className="min-h-[85vh] bg-[#f7f7f7] pb-12">
   
   <div className="flex flex-col items-center justify-center pt-12 pb-8">
