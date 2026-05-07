@@ -1,69 +1,73 @@
- Sanjeeva
-1.1 Real-Time Emergency Blood Availability Platform
+# React + TypeScript + Vite
 
-Sanjeeva is a smart blood discovery and emergency response platform designed to help users quickly locate nearby available blood of the required type during critical situations.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-The platform connects blood seekers with verified blood banks, hospitals, and donation centers through real-time availability updates, location-based search, and emergency request support.
+Currently, two official plugins are available:
 
-2. Problem Statement
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-During medical emergencies, families often lose valuable time searching manually for required blood types by calling hospitals, visiting blood banks, or posting on social media.
+## React Compiler
 
-The lack of centralized and real-time blood availability information can delay treatment and increase medical risk.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-3. Solution
+## Expanding the ESLint configuration
 
-Sanjeeva solves this problem by providing a digital platform where users can:
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-a. Search required blood groups instantly
-b. Find the nearest available blood banks or hospitals
-c. View real-time blood stock status
-d. Raise emergency blood requests
-e. Access verified providers quickly
-f. Save valuable time during critical emergencies
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-4. Key Features
-4.1 User Features
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-a. Search blood by type (A+, A-, B+, O+, O-, AB+, etc.)
-b. Find nearby providers using location services
-c. Filter by distance and availability
-d. View provider details and contact information
-e. Submit emergency blood requests
-f. Get directions to provider locations
-g. Fully responsive user interface
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-4.2 Provider Features
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-a. Secure provider login dashboard
-b. Update stock by blood group
-c. Mark stock as available, low, or unavailable
-d. Manage branch information
-e. Receive and manage emergency requests
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-4.3 Admin Features
-
-a. Verify hospitals and blood banks
-b. Manage registered providers
-c. Monitor stock updates
-d. View analytics and demand trends
-
-5. Supported Blood Types
-
-a. A+
-b. A-
-c. B+
-d. B-
-e. AB+
-f. AB-
-g. O+
-h. O-
-
-6. Tech Stack
-6.1 Frontend
-
-a. React.js
-b. Tailwind CSS
-c. HTML5
-d. CSS3
-e. JavaScript
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
