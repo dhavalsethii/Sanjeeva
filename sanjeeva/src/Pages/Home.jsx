@@ -1,12 +1,12 @@
-import Navbar from "../components/Navbar";
-import Hero from "../components/HeroSection";
-import Features from "../components/FeaturesSection";
-import Footer from "../components/Footer";
+import Navbar from "../Components/Navbar";
+import Hero from "../Components/HeroSection";
+import Features from "../Components/FeaturesSection";
+import Footer from "../Components/Footer";
 
 function Home() {
   return (
     <div>
-      <Navbar />
+      <Navbar variant="light" />
       <Hero />
       <Features />
       <Footer />

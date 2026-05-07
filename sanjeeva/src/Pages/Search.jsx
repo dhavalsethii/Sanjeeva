@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../index.css'
-
+import Footer from '../Components/Footer'
+import Navbar from '../Components/Navbar'
 const Search = ({ data = [] }) => {
     const [bloodGroup, setBloodGroup] = useState('A+')
     const [location, setLocation] = useState('')
@@ -23,7 +24,9 @@ const Search = ({ data = [] }) => {
     }
 
     return (
-        <div className='max-w-7xl mx-auto px-4 py-8'>
+        <>
+        <Navbar variant="light" />
+        <div className='max-w-full mx-auto px-10 py-8 min-h-[85vh]'>
             <h1 className='text-4xl font-sans mb-1 font-bold'>
                 <span className='text-red-600'>Find blood</span> near you
             </h1>
@@ -124,12 +127,14 @@ const Search = ({ data = [] }) => {
                         </div>
                     </>
                 ) : (
-                    <div className='text-center py-20 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200'>
+                    <div className='text-center py-20 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 '>
                         <p className='text-gray-400 text-lg'>Enter filters above and click search to find blood donors near you.</p>
                     </div>
                 )}
             </div>
         </div>
+        <Footer/>
+        </>
     )
 }
 

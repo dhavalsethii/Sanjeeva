@@ -1,5 +1,10 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css'
+import EmergencyRequest from './Pages/EmergencyRequest';
 import Search from './Pages/Search'
+import Home from './Pages/Home';
+import Dashboard from './Pages/Dashboard';
+
 const App = () => {
   const hospitalsData = [
     { hospital: "Apollo Hospital", city: "Bengaluru", distance_km: 1.2, last_updated_min: 4, blood_group: "A+", available: true, contact: "+91-80-11112222", directions_url: "https://maps.google.com/?q=Apollo+Hospital+Bengaluru" },
@@ -56,10 +61,18 @@ const App = () => {
     { hospital: "Belle Vue Clinic", city: "Kolkata", distance_km: 2.7, last_updated_min: 8, blood_group: "B-", available: true, contact: "+91-33-77778888", directions_url: "https://maps.google.com/?q=Belle+Vue+Clinic+Kolkata" },
     { hospital: "Desun Hospital", city: "Kolkata", distance_km: 4.4, last_updated_min: 12, blood_group: "B-", available: false, contact: "+91-33-88889999", directions_url: "https://maps.google.com/?q=Desun+Hospital+Kolkata" }
   ];
+
   return (
-    <div>
-      <Search data={hospitalsData} />
-    </div>
+    <Router>
+      <div >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Search data={hospitalsData} />} />
+          <Route path="/emergency" element={<EmergencyRequest />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 
