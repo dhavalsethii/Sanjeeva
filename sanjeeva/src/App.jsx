@@ -4,6 +4,7 @@ import EmergencyRequest from './Pages/EmergencyRequest';
 import Search from './Pages/Search'
 import Home from './Pages/Home';
 import Dashboard from './Pages/Dashboard';
+import SOS from './Pages/SOS'; 
 
 const App = () => {
   const hospitalsData = [
@@ -70,6 +71,7 @@ const App = () => {
           <Route path="/search" element={<Search data={hospitalsData} />} />
           <Route path="/emergency" element={<EmergencyRequest />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/sos" element={<SOS />} /> 
         </Routes>
       </div>
     </Router>
