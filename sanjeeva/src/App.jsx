@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css'
-import EmergencyRequest from './Pages/EmergencyRequest';
 import Search from './Pages/Search'
 import Home from './Pages/Home';
 import Dashboard from './Pages/Dashboard';
@@ -69,7 +68,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search data={hospitalsData} />} />
-          <Route path="/emergency" element={<EmergencyRequest />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/sos" element={<SOS />} /> 
         </Routes>

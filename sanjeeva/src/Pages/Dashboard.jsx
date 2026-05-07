@@ -1,121 +1,131 @@
 import React, { useState } from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import { Building2, RefreshCw } from "lucide-react";
 
 const Dashboard = () => {
-  const [requests, setRequests] = useState([
-    {
-      id: 1,
-      name: "Rahul Sharma",
-      blood: "A+",
-      units: 2,
-      hospital: "AIIMS Delhi",
-      contact: "+91-9876543210",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      name: "Priya Singh",
-      blood: "O+",
-      units: 1,
-      hospital: "Apollo Hospital",
-      contact: "+91-9123456780",
-      status: "Accepted",
-    },
-  ]);
+  const [selectedHospital, setSelectedHospital] = useState("Apollo Hospital");
 
-  const updateStatus = (id, newStatus) => {
-    setRequests((prev) =>
-      prev.map((req) =>
-        req.id === id ? { ...req, status: newStatus } : req
-      )
-    );
+  const hospitals = [
+    { name: "Apollo Hospital", location: "Bengaluru", type: "Hospital" },
+    { name: "Red Cross Blood Bank", location: "Bengaluru", type: "Blood Bank" },
+    { name: "Manipal Hospital", location: "Bengaluru", type: "Hospital" },
+    { name: "Lifeline Blood Centre", location: "Mumbai", type: "Blood Bank" },
+    { name: "Fortis Healthcare", location: "Delhi", type: "Hospital" },
+    { name: "Sanjeevani Blood Bank", location: "Hyderabad", type: "Blood Bank" },
+  ];
+
+  const bloodInventory = [
+    { type: "A+", status: "Available" },
+    { type: "A-", status: "Low" },
+    { type: "B+", status: "Available" },
+    { type: "B-", status: "Unavailable" },
+    { type: "O+", status: "Available" },
+    { type: "O-", status: "Low" },
+    { type: "AB+", status: "Available" },
+    { type: "AB-", status: "Unavailable" },
+  ];
+
+  const getStatusStyles = (status) => {
+    switch (status) {
+      case "Available": return "bg-green-50 text-green-600 border-green-200";
+      case "Low": return "bg-orange-50 text-orange-600 border-orange-200";
+      case "Unavailable": return "bg-red-50 text-red-500 border-red-200";
+      default: return "bg-gray-50 text-gray-400";
+    }
   };
-
-  const total = requests.length;
-  const pending = requests.filter((r) => r.status === "Pending").length;
-  const accepted = requests.filter((r) => r.status === "Accepted").length;
 
   return (
     <>
       <Navbar />
 
-      <div className="min-h-[85vh] bg-[#f7f7f7] p-8">
+      <div className="min-h-[85vh] bg-[#f8f9fb] px-6 py-10">
+        <div className="mb-10 max-w-7xl mx-auto">
+          <h1 className="text-5xl font-black text-gray-900">
+            Provider Dashboard
+          </h1>
+          <p className="text-gray-500 mt-2">
+            Manage live blood inventory across your facility.
+          </p>
+        </div>
 
-        {/* HEADER */}
-        <h1 className="text-4xl font-black mb-8">
-          Provider Dashboard
-        </h1>
 
-        {/* STATS */}
-        <div className="grid grid-cols-3 gap-6 mb-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
           
-          <div className="bg-white p-6 rounded-2xl shadow-sm border">
-            <p className="text-gray-500 text-sm">Total Requests</p>
-            <h2 className="text-3xl font-bold">{total}</h2>
-          </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-sm border">
-            <p className="text-gray-500 text-sm">Pending</p>
-            <h2 className="text-3xl font-bold text-yellow-600">{pending}</h2>
-          </div>
+          <aside className="w-full md:w-1/3 space-y-4">
+            {hospitals.map((hosp) => (
+              <button
+                key={hosp.name}
+                onClick={() => setSelectedHospital(hosp.name)}
+                className={`w-full flex items-start gap-4 p-5 rounded-3xl border transition-all text-left ${
+                  selectedHospital === hosp.name
+                    ? "bg-[#fef2f2] border-[#ea384c] shadow-sm"
+                    : "bg-white border-gray-200 hover:border-gray-300"
+                }`}
+              >
+                <div className={`p-3 rounded-2xl ${selectedHospital === hosp.name ? "bg-white" : "bg-gray-100"}`}>
+                  <Building2 
+                    size={24} 
+                    className={selectedHospital === hosp.name ? "text-[#ea384c]" : "text-gray-400"} 
+                  />
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-800">{hosp.name}</h3>
+                  <p className="text-sm text-gray-500">
+                    {hosp.location} • {hosp.type}
+                  </p>
+                </div>
+              </button>
+            ))}
+          </aside>
 
-          <div className="bg-white p-6 rounded-2xl shadow-sm border">
-            <p className="text-gray-500 text-sm">Accepted</p>
-            <h2 className="text-3xl font-bold text-green-600">{accepted}</h2>
-          </div>
 
-        </div>
-
-        {/* REQUESTS */}
-        <div className="grid gap-6">
-          {requests.map((req) => (
-            <div
-              key={req.id}
-              className="bg-white p-6 rounded-2xl shadow-sm border hover:shadow-md transition"
-            >
-
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold">{req.name}</h2>
-
-                <span
-                  className={`px-3 py-1 rounded-full text-sm font-bold ${
-                    req.status === "Pending"
-                      ? "bg-yellow-100 text-yellow-600"
-                      : "bg-green-100 text-green-600"
-                  }`}
-                >
-                  {req.status}
-                </span>
+          <section className="flex-1 bg-white rounded-[2.5rem] p-8 border shadow-sm">
+            <div className="flex justify-between items-end mb-10">
+              <div>
+                <h2 className="text-4xl font-bold text-gray-900">{selectedHospital}</h2>
+                <p className="text-gray-400 mt-1">
+                  {hospitals.find(h => h.name === selectedHospital)?.location} • Last updated 4 min ago
+                </p>
               </div>
-
-              <div className="grid grid-cols-2 gap-4 text-gray-600">
-                <p><strong>Blood:</strong> {req.blood}</p>
-                <p><strong>Units:</strong> {req.units}</p>
-                <p><strong>Hospital:</strong> {req.hospital}</p>
-                <p><strong>Contact:</strong> {req.contact}</p>
-              </div>
-
-              <div className="mt-5 flex gap-3">
-                <button
-                  onClick={() => updateStatus(req.id, "Accepted")}
-                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
-                >
-                  Accept
-                </button>
-
-                <button
-                  onClick={() => updateStatus(req.id, "Rejected")}
-                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
-                >
-                  Reject
-                </button>
-              </div>
-
+              <button className="flex items-center gap-2 px-5 py-2 border border-gray-200 rounded-xl font-bold text-sm hover:bg-gray-50 transition shadow-sm">
+                <RefreshCw size={18} /> Sync
+              </button>
             </div>
-          ))}
-        </div>
 
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {bloodInventory.map((item) => (
+                <div key={item.type} className="p-8 rounded-[2rem] border border-gray-100 bg-gray-50/30">
+                  <div className="flex justify-between items-center mb-8">
+                    <span className="text-4xl font-black text-[#ea384c]">
+                      {item.type}
+                    </span>
+                    <span className={`px-4 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wider flex items-center gap-2 ${getStatusStyles(item.status)}`}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                      {item.status}
+                    </span>
+                  </div>
+
+                  <div className="flex p-1 bg-gray-200/50 rounded-2xl">
+                    {["Available", "Low", "Unavailable"].map((status) => (
+                      <button
+                        key={status}
+                        className={`flex-1 py-3 rounded-xl text-[10px] font-bold uppercase transition-all ${
+                          item.status === status
+                            ? "bg-[#ea384c] text-white shadow-md"
+                            : "text-gray-400 hover:text-gray-600"
+                        }`}
+                      >
+                        {status}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
 
       <Footer />
