@@ -89,9 +89,7 @@ const Dashboard = () => {
                   {hospitals.find(h => h.name === selectedHospital)?.location} • Last updated 4 min ago
                 </p>
               </div>
-              <button className="flex items-center gap-2 px-5 py-2 border border-gray-200 rounded-xl font-bold text-sm hover:bg-gray-50 transition shadow-sm">
-                <RefreshCw size={18} /> Sync
-              </button>
+
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
